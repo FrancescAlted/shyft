@@ -107,7 +107,7 @@ class RegionModelRepository(interfaces.RegionModelRepository):
             * glacier-fraction: float array of dim (xcoord, ycoord)
     """
 
-    def __init__(self, region_config, model_config, region_model, epsg):
+    def __init__(self, region_config, model_config, region_model, epsg=None):
         """
         Parameters
         ----------
@@ -131,7 +131,7 @@ class RegionModelRepository(interfaces.RegionModelRepository):
         self._mconf = model_config
         self._region_model = region_model
         self._mask = None
-        self._epsg = epsg
+        self._epsg = epsg if epsg else str(region_config.domain()["EPSG"])
         self._data_file = path.join(shyftdata_dir, self._rconf.repository()["data_file"])
 
     @property

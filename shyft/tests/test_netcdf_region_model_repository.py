@@ -45,7 +45,7 @@ class NetCDFRegionModelRepositoryTestCase(unittest.TestCase):
             xcoords = ds.groups["elevation"].variables["xcoord"][:]
             ycoords = ds.groups["elevation"].variables["ycoord"][:]
             epsg = ds.groups["elevation"].epsg
-        bbr = BoundingBoxRegion(xcoords, ycoords, epsg,32632) 
+        bbr = BoundingBoxRegion(xcoords, ycoords, epsg, 32632)
         bbox = bbr.bounding_box(32632)
         self.assertTrue(np.linalg.norm(bbr.x - bbox[0]) < 1.0e-14)
         self.assertTrue(np.linalg.norm(bbr.y - bbox[1]) < 1.0e-14)
