@@ -10,17 +10,17 @@ class GeoTsRepositoryCollection(interfaces.GeoTsRepository):
     In many situations we need to to combine geo-located time-series from
     different sources, - usually represented as already existing
     GeoTsRepository implementations.
-    
+
     This class does exactly that, it keeps a collection of GeoTsRepository
     - when asked for time_series/forecast/ensembles,
      - it returns the combination of time-series found in the respective
        repository.
-    We have started out providing to simple hopefully useful ways of combining
+    We have started out providing to hopefully simple useful ways of combining
     the results:
     add: - the result will be the union of the data provided by the geo-ts-repositories
     replace: the geo-ts from the last geo-ts-repository will replace
              the one preceeding in the list.
-             
+
     """
 
     def __init__(self, geo_ts_repositories, reduce_type="replace"):
@@ -53,7 +53,7 @@ class GeoTsRepositoryCollection(interfaces.GeoTsRepository):
 
     def get_forecast_ensemble(self, input_source_types, utc_period,
                               t_c, geo_location_criteria=None):
-        ensembles = [r.get_forecast_ensemble(input_source_types, utc_period, t_c, 
+        ensembles = [r.get_forecast_ensemble(input_source_types, utc_period, t_c,
                                              geo_location_criteria)
                      for r in self.geo_ts_repositories]
         ensemble = ensembles[0]
@@ -64,5 +64,3 @@ class GeoTsRepositoryCollection(interfaces.GeoTsRepository):
                 else:
                     raise GeoTsRepositoryCollectionError("Only replace is supported yet")
         return ensemble
-
-
