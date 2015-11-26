@@ -10,7 +10,6 @@ from shyft import api
 class SimulatorError(Exception):
     pass
 
-
 class SimpleSimulator(object):
     """
     This simlator orchestrates a simple shyft run based on repositories
